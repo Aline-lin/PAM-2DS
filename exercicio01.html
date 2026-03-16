@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa de Matemática</title>
+</head>
+<body background="flor.jpg">
+
+<style>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    gap: 30px;
+}
+
+.card {
+    background: rgb(240, 235, 169);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 330px;
+}
+
+.card1 {
+    background: rgb(240, 235, 169);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 480px;
+}
+
+.card2 {
+    background: rgb(240, 235, 169);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 70px;
+}
+
+.card3 {
+    background: rgb(240, 235, 169);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 55px;
+}
+
+.card4 {
+    background: rgb(240, 235, 169);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 50px;
+}
+</style>
+
+<script>
+alert("Mini programa de matemática!");
+</script>
+
+<script>
+let n1 = Number(prompt("Digite o primeiro número:"));
+let n2 = Number(prompt("Digite o segundo número:"));
+let n3 = Number(prompt("Digite o terceiro número:"));
+let n4 = Number(prompt("Digite o quarto número:"));
+</script>
+
+<div class="container">
+<div class="card">
+<button onclick="alert('Dobro: ' + dobro)">Dobro</button>
+<button onclick="alert('Triplo: ' + triplo)">Triplo</button>
+<button onclick="alert('Quádruplo: ' + quadruplo)">Quádruplo</button>
+<button onclick="alert('Quíntuplo: ' + quintuplo)">Quíntuplo</button>
+<button onclick="alert('Sêxtuplo: ' + sextuplo)">Sêxtuplo</button><br><br><br>
+</div>
+</div>
+
+<div class="container">
+<div class="card1">
+<button onclick="alert('Quadrado: ' + quadrado)">Quadrado</button>
+<button onclick="alert('Cubo: ' + cubo)">Cubo</button>
+<button onclick="alert('Quarta Potência: ' + quarta)">Quarta Potência</button>
+<button onclick="alert('Quinta Potência: ' + quinta)">Quinta Potência</button>
+<button onclick="alert('Sexta Potência: ' + sexta)">Sexta Potência</button><br><br><br>
+</div>
+</div>
+
+<script>
+let dobro = n1*2;
+let triplo = n1*3;
+let quadruplo = n1*4;
+let quintuplo = n1*5;
+let sextuplo = n1*6;
+
+let quadrado = n1**2;
+let cubo = n1**3;
+let quarta = n1**4;
+let quinta = n1**5;
+let sexta = n1**6;
+</script>
+
+<script>
+
+</script>
+
+<div class="container">
+<div class="card2">
+<button onclick="alert('Delta: ' + delta + 'X1: ' + x1 + 'X2: ' + x2)">Bhaskara</button><br><br><br>
+</div>
+</div>
+
+<script>
+
+</script>
+
+<div class="container">
+<div class="card3">
+<button onclick="alert('Média: ' + media)">Média</button><br><br><br>
+</div>
+</div>
+
+<div class="container">
+<div class="card4">
+<button onclick="alert('O número ' + n1 + ' é: ' + impoupar)">Par ou Ímpar</button>
+</div>
+</div>
+
+<script>
+let a = n1;
+let b = n2;
+let c = n3;
+
+let delta = b*b-4*a*c;
+
+if (delta < 0) {
+    delta = "Delta negativo"};
+
+let x1 = (-b+Math.sqrt(delta))/(2*a);
+let x2 = (-b-Math.sqrt(delta))/(2*a);
+</script>
+
+<script>
+let media = (n1+n2+n3+n4)/4;
+</script>
+
+<script>
+let impoupar;
+if (n1 % 2 == 0) {
+    impoupar = "Par";
+} else {
+    impoupar = "Ímpar";}
+</script>
+
+</body>
+</html>

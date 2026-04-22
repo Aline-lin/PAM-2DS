@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Controle Escolar</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #ff94c0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #ffbad7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+    background: #5dff96;
+    color: rgb(0, 0, 0);
+    border: none;
+}
+
+.aluno {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.aprovado {
+    color: green;
+}
+
+.reprovado {
+    color: red;
+}
+
+.erro {
+    color: red;
+}
+
+.stats {
+    margin-top: 15px;
+    background: #eee;
+    padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Controle Escolar</h1>
+
+    <form id="formAluno">
+        <input type="text" id="nome" placeholder="Nome do aluno">
+        <input type="number" id="idade" placeholder="Idade">
+        <input type="number" id="nota" placeholder="Nota (0 a 10)" step="0.1">
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <p id="mensagem" class="erro"></p>
+
+    <h2>Alunos</h2>
+    <div id="lista"></div>
+
+    <div class="stats" id="stats"></div>
+</div>
+
+<script>
+let alunos = [];
+
+const form = document.getElementById("formAluno");
+const mensagem = document.getElementById("mensagem");
+const lista = document.getElementById("lista");
+const stats = document.getElementById("stats");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let nome = document.getElementById("nome").value.trim();
+    let idade = Number(document.getElementById("idade").value);
+    let nota = Number(document.getElementById("nota").value);
+
+    if (!nome || !idade || nota === "") {
+        mensagem.textContent = "Preencha todos os campos!";
+        return;
+    }
+
+    if (idade <= 0) {
+        mensagem.textContent = "Idade inválida!";
+        return;
+    }
+
+    if (nota < 0 || nota > 10) {
+        mensagem.textContent = "Nota deve ser entre 0 e 10!";
+        return;
+    }
+
+    mensagem.textContent = "";
+
+    let aluno = {
+        nome,
+        idade,
+        nota
+    };
+
+    alunos.push(aluno);
+
+    form.reset();
+    renderizar();
+});
+
+function renderizar() {
+    lista.innerHTML = "";
+
+    alunos.forEach((aluno, index) => {
+        let status = aluno.nota >= 6 ? "Aprovado" : "Reprovado";
+
+        let div = document.createElement("div");
+        div.classList.add("aluno");
+
+        div.innerHTML = `
+            <strong>${aluno.nome}</strong> - ${aluno.idade} anos - Nota: ${aluno.nota}
+            <span class="${aluno.nota >= 6 ? 'aprovado' : 'reprovado'}">(${status})</span>
+            <br>
+            <button onclick="remover(${index})">Remover</button>
+            <button onclick="detalhes(${index})">Detalhes</button>
+        `;
+
+        lista.appendChild(div);
+    });
+
+    atualizarStats();
+}
+
+function remover(index) {
+    alunos.splice(index, 1);
+    renderizar();
+}
+
+function detalhes(index) {
+    let aluno = alunos[index];
+    alert(`Nome: ${aluno.nome}\nIdade: ${aluno.idade}\nNota: ${aluno.nota}`);
+}
+
+function atualizarStats() {
+    let total = alunos.length;
+
+    let soma = 0;
+    let aprovados = 0;
+
+    alunos.forEach(aluno => {
+        soma += aluno.nota;
+        if (aluno.nota >= 6) aprovados++;
+    });
+
+    let media = total ? (soma / total).toFixed(2) : 0;
+    let reprovados = total - aprovados;
+
+    stats.innerHTML = `
+        <p>Total: ${total}</p>
+        <p>Média: ${media}</p>
+        <p>Aprovados: ${aprovados}</p>
+        <p>Reprovados: ${reprovados}</p>
+    `;
+}
+</script>
+
+</body>
+</html>

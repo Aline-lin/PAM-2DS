@@ -1,0 +1,487 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Switch,
+  StyleSheet,
+} from "react-native";
+import Constants from "expo-constants";
+import { Picker } from "@react-native-picker/picker";
+
+import logo from "./assets/adaptive-icon.png";
+
+function Um() {
+  return (
+    <View style={styles.containerUm}>
+      <View style={{ flex: 0.5, backgroundColor: "crimson" }} />
+      <View style={{ flex: 0.5, backgroundColor: "salmon" }} />
+    </View>
+  );
+}
+
+function Dois() {
+  return (
+    <View style={styles.containerUm}>
+      <View style={{ flex: 0.5, flexDirection: "row", backgroundColor: "crimson" }}>
+        <View style={{ flex: 0.5, backgroundColor: "lime" }} />
+        <View style={{ flex: 0.5, backgroundColor: "aquamarine" }} />
+      </View>
+      <View style={{ flex: 0.5, backgroundColor: "salmon" }} />
+    </View>
+  );
+}
+
+function Tres() {
+  return (
+    <View style={styles.containerUm}>
+      <View style={{ flex: 0.5, flexDirection: "row", backgroundColor: "teal" }}>
+        <View style={{ flex: 0.5, backgroundColor: "lime" }} />
+        <View style={{ flex: 0.5, backgroundColor: "skyblue" }} />
+      </View>
+      <View style={{ flex: 0.5, backgroundColor: "salmon" }} />
+    </View>
+  );
+}
+
+function Quatro() {
+  return (
+    <View style={styles.containerUm}>
+      <View style={{ flex: 0.5, flexDirection: "row", backgroundColor: "teal" }}>
+        <View style={{ flex: 0.5, backgroundColor: "lime" }} />
+        <View style={{ flex: 0.5, backgroundColor: "skyblue" }} />
+      </View>
+      <View style={{ flex: 0.5, backgroundColor: "salmon" }}>
+        <Image
+          source={logo}
+          style={{ flex: 1, alignSelf: "center" }}
+          resizeMode="contain"
+        />
+      </View>
+    </View>
+  );
+}
+
+function Cinco() {
+  const mostrarAlerta = () => Alert.alert("Boa noite!");
+  return (
+    <View style={styles.containerUm}>
+      <View style={{ flex: 0.5, flexDirection: "row", backgroundColor: "teal" }}>
+        <View style={{ flex: 0.5, backgroundColor: "lime", justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity onPress={mostrarAlerta}>
+            <Image source={logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 0.5, backgroundColor: "skyblue", justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity onPress={mostrarAlerta}>
+            <Image source={logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{ flex: 0.5, backgroundColor: "salmon", justifyContent: "center", alignItems: "center" }}>
+        <TouchableOpacity onPress={mostrarAlerta}>
+          <Image source={logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+function Seis() {
+  const [nome, setNome] = useState("");
+  const [idade, setIdade] = useState("");
+  const [salvo, setSalvo] = useState(null);
+
+  const salvar = () => setSalvo({ nome, idade });
+
+  return (
+    <View style={styles.containerForm}>
+      <Text>Nome</Text>
+      <TextInput style={styles.input} value={nome} onChangeText={setNome} />
+      <Text>Idade</Text>
+      <TextInput
+        style={styles.input}
+        value={idade}
+        onChangeText={setIdade}
+        keyboardType="numeric"
+      />
+      <TouchableOpacity style={styles.botao} onPress={salvar}>
+        <Text style={styles.textoBotao}>SALVAR</Text>
+      </TouchableOpacity>
+      {salvo && <Text>{salvo.nome} - {salvo.idade}</Text>}
+    </View>
+  );
+}
+
+function Sete() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [logado, setLogado] = useState(null);
+
+  return (
+    <View style={styles.safeArea}>
+      <Text>E-mail</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        autoComplete="email"
+        autoCorrect={false}
+        keyboardType="email-address"
+      />
+      <Text>Senha</Text>
+      <TextInput
+        style={styles.input}
+        value={senha}
+        onChangeText={setSenha}
+        secureTextEntry={true}
+        maxLength={8}
+      />
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          style={styles.botaoAmarelo}
+          onPress={() => setLogado({ email, senha })}
+        >
+          <Text style={styles.textoBotao}>Logar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.botaoAmarelo}>
+          <Text style={styles.textoBotao}>Cadastrar-se</Text>
+        </TouchableOpacity>
+      </View>
+      {logado && <Text>{logado.email} - {logado.senha}</Text>}
+    </View>
+  );
+}
+
+function Oito() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmacao, setConfirmacao] = useState("");
+  const [cadastrado, setCadastrado] = useState(null);
+
+  return (
+    <View style={styles.safeArea}>
+      <View style={styles.moldura}>
+        <Text style={styles.tituloMoldura}>CADASTRO</Text>
+        <Text>E-mail</Text>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          keyboardType="email-address"
+        />
+        <Text>Senha</Text>
+        <TextInput
+          style={styles.input}
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <Text>Confirmação da senha</Text>
+        <TextInput
+          style={styles.input}
+          value={confirmacao}
+          onChangeText={setConfirmacao}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.botaoAmarelo}
+            onPress={() => setCadastrado({ email, senha, confirmacao })}
+          >
+            <Text style={styles.textoBotao}>Cadastrar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botaoAmarelo}>
+            <Text style={styles.textoBotao}>Logar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {cadastrado && (
+        <Text>{cadastrado.email} - {cadastrado.senha} - {cadastrado.confirmacao}</Text>
+      )}
+    </View>
+  );
+}
+
+function Nove() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmacao, setConfirmacao] = useState("");
+  const [perfil, setPerfil] = useState("manager");
+  const [cadastrado, setCadastrado] = useState(null);
+
+  return (
+    <View style={styles.safeArea}>
+      <View style={styles.moldura}>
+        <Text style={styles.tituloMoldura}>CADASTRO</Text>
+        <Text>E-mail</Text>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          keyboardType="email-address"
+        />
+        <Text>Senha</Text>
+        <TextInput
+          style={styles.input}
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <Text>Confirmação da senha</Text>
+        <TextInput
+          style={styles.input}
+          value={confirmacao}
+          onChangeText={setConfirmacao}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <Text>Confirmação da senha</Text>
+        <Picker selectedValue={perfil} onValueChange={setPerfil} style={styles.input}>
+          <Picker.Item label="Administrador" value="admin" />
+          <Picker.Item label="Gestor" value="manager" />
+          <Picker.Item label="Usuário" value="user" />
+        </Picker>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.botaoAmarelo}
+            onPress={() => setCadastrado({ email, senha, confirmacao, perfil })}
+          >
+            <Text style={styles.textoBotao}>Cadastrar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botaoAmarelo}>
+            <Text style={styles.textoBotao}>Logar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {cadastrado && (
+        <Text>
+          {cadastrado.email} - {cadastrado.senha} - {cadastrado.confirmacao} - {cadastrado.perfil}
+        </Text>
+      )}
+    </View>
+  );
+}
+
+function Dez() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmacao, setConfirmacao] = useState("");
+  const [perfil, setPerfil] = useState("manager");
+  const [logado, setLogado] = useState(false);
+  const [cadastrado, setCadastrado] = useState(null);
+
+  return (
+    <View style={styles.safeArea}>
+      <View style={styles.moldura}>
+        <Text style={styles.tituloMoldura}>CADASTRO</Text>
+        <Text>E-mail</Text>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          keyboardType="email-address"
+        />
+        <Text>Senha</Text>
+        <TextInput
+          style={styles.input}
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <Text>Confirmação da senha</Text>
+        <TextInput
+          style={styles.input}
+          value={confirmacao}
+          onChangeText={setConfirmacao}
+          secureTextEntry={true}
+          maxLength={8}
+        />
+        <Text>Confirmação da senha</Text>
+        <Picker selectedValue={perfil} onValueChange={setPerfil} style={styles.input}>
+          <Picker.Item label="Administrador" value="admin" />
+          <Picker.Item label="Gestor" value="manager" />
+          <Picker.Item label="Usuário" value="user" />
+        </Picker>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text>Manter-se conectado</Text>
+          <Switch
+            trackColor={{ false: "#e77878", true: "#94df83" }}
+            thumbColor={logado ? "#47eb22" : "#ed1111"}
+            value={logado}
+            onValueChange={setLogado}
+          />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.botaoAmarelo}
+            onPress={() => setCadastrado({ email, senha, confirmacao, perfil, logado })}
+          >
+            <Text style={styles.textoBotao}>Cadastrar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botaoAmarelo}>
+            <Text style={styles.textoBotao}>Logar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {cadastrado && (
+        <Text>
+          {cadastrado.email} - {cadastrado.senha} - {cadastrado.confirmacao} - {cadastrado.perfil} - {cadastrado.logado ? "sim" : "não"}
+        </Text>
+      )}
+    </View>
+  );
+}
+
+function Home({ irPara }) {
+  const botoes = [
+    "Um", "Dois", "Três", "Quatro", "Cinco",
+    "Seis", "Sete", "Oito", "Nove", "Dez",
+  ];
+
+  return (
+    <View style={styles.homeContainer}>
+      <Image source={logo} style={{ width: 140, height: 140 }} resizeMode="contain" />
+      <Text style={styles.homeTitulo}>HOME</Text>
+      <View style={styles.homeGrid}>
+        {botoes.map((nome) => (
+          <TouchableOpacity
+            key={nome}
+            style={styles.homeBotao}
+            onPress={() => irPara(nome)}
+          >
+            <Text style={styles.textoBotao}>{nome}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+const telas = {
+  Um, Dois, Tres, Quatro, Cinco, Seis, Sete, Oito, Nove, Dez,
+};
+
+export default function App() {
+  const [tela, setTela] = useState("Home");
+
+  if (tela === "Home") return <Home irPara={(nome) => setTela(nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))} />;
+
+  const Tela = telas[tela];
+  return (
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity style={styles.voltar} onPress={() => setTela("Home")}>
+        <Text style={styles.textoBotao}>Voltar</Text>
+      </TouchableOpacity>
+      <Tela />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  containerUm: {
+    flex: 1,
+    flexDirection: "column",
+    paddingTop: Constants.statusBarHeight,
+  },
+  containerForm: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    padding: 16,
+    backgroundColor: "#1c1c1c",
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    padding: 16,
+    backgroundColor: "#1c1c1c",
+  },
+  input: {
+    backgroundColor: "#fff",
+    borderRadius: 4,
+    padding: 8,
+    marginBottom: 12,
+  },
+  botao: {
+    backgroundColor: "#1e88e5",
+    padding: 12,
+    borderRadius: 4,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  botaoAmarelo: {
+    backgroundColor: "#f5a623",
+    padding: 10,
+    borderRadius: 4,
+    alignItems: "center",
+    marginRight: 8,
+    marginBottom: 12,
+  },
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  moldura: {
+    borderWidth: 1,
+    borderColor: "#f5a623",
+    borderRadius: 8,
+    maxWidth: 270,
+    alignSelf: "center",
+    padding: 16,
+    marginTop: 40,
+  },
+  tituloMoldura: {
+    color: "#f5a623",
+    textAlign: "center",
+    fontWeight: "bold",
+    marginBottom: 12,
+  },
+  homeContainer: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  homeTitulo: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 12,
+  },
+  homeGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    width: 220,
+  },
+  homeBotao: {
+    backgroundColor: "#f5a623",
+    padding: 12,
+    borderRadius: 4,
+    alignItems: "center",
+    width: 90,
+    margin: 5,
+  },
+  voltar: {
+    backgroundColor: "#444",
+    padding: 8,
+    alignItems: "center",
+  },
+});
